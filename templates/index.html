@@ -1,0 +1,40 @@
+<!-- templates/index.html -->
+{% extends "base.html" %}
+{% block content %}
+<h2>Events</h2>
+{% if events %}
+  <div class="table-responsive">
+    <table class="table table-striped align-middle">
+      <thead>
+         <tr>
+           <th>Title</th>
+           <th>Description</th>
+           <th>Date</th>
+           <th>Time</th>
+           <th>Location</th>
+           <th>Actions</th>
+         </tr>
+      </thead>
+      <tbody>
+         {% for event in events %}
+         <tr>
+           <td>{{ event.title }}</td>
+           <td>{{ event.description }}</td>
+           <td>{{ event.date.strftime('%Y-%m-%d') }}</td>
+           <td>{{ event.time.strftime('%H:%M') }}</td>
+           <td>{{ event.location }}</td>
+           <td>
+             <a href="{{ url_for('edit_event', event_id=event.id) }}" class="btn btn-sm btn-warning me-1">Edit</a>
+             <form action="{{ url_for('delete_event', event_id=event.id) }}" method="POST" class="delete-form d-inline">
+               <button type="submit" class="btn btn-sm btn-danger">Delete</button>
+             </form>
+           </td>
+         </tr>
+         {% endfor %}
+      </tbody>
+    </table>
+  </div>
+{% else %}
+  <p>No events found. <a href="{{ url_for('add_event') }}">Add a new event</a>.</p>
+{% endif %}
+{% endblock %}

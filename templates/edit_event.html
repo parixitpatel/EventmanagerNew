@@ -1,0 +1,38 @@
+<!-- templates/edit_event.html -->
+{% extends "base.html" %}
+{% block content %}
+<div class="d-flex justify-content-center align-items-center" style="min-height: 60vh;">
+  <div class="col-11 col-md-8 col-lg-6">
+    <div class="card shadow">
+      <div class="card-body">
+        <h2 class="mb-4 text-center">Edit Event</h2>
+        <form method="POST">
+          <div class="mb-3">
+            <label for="title" class="form-label">Title</label>
+            <input type="text" class="form-control" id="title" name="title" value="{{ event.title }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="description" class="form-label">Description</label>
+            <textarea class="form-control" id="description" name="description" rows="3" required>{{ event.description }}</textarea>
+          </div>
+          <div class="mb-3">
+            <label for="date" class="form-label">Date</label>
+            <input type="date" class="form-control" id="date" name="date" value="{{ event.date.strftime('%Y-%m-%d') }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="time" class="form-label">Time</label>
+            <input type="time" class="form-control" id="time" name="time" value="{{ event.time.strftime('%H:%M') }}" required>
+          </div>
+          <div class="mb-3">
+            <label for="location" class="form-label">Location</label>
+            <input type="text" class="form-control" id="location" name="location" value="{{ event.location }}" required>
+          </div>
+          <div class="d-grid">
+            <button type="submit" class="btn btn-primary">Update Event</button>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
